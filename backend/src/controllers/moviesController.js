@@ -6,7 +6,7 @@ import { config } from "../config.js";
 
 // configuración de cloudinary
 cloudinary.config({
-  cloud_name: config.cloudinary.cloudinary_name,
+  cloud_name: config.cloudinary.cloud_name,
   api_key: config.cloudinary.cloudinary_api_key,
   api_secret: config.cloudinary.cloudinary_api_secret,
 });
@@ -16,8 +16,8 @@ const moviesController = {};
 
 // select
 moviesController.getAllMovies = async (req, res) => {
-  const movie = await movie.find();
-  res.json(movie);
+  const movies = await movie.find();
+  res.json(movies);
 };
 
 // insert

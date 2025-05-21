@@ -32,18 +32,16 @@ recoveryPasswordController.requestCode = async (req, res) => {
       return res.json({ message: "User not found" });
     }
 
-    // Generar un codigo aleatorio (el que vamos a mandar)
     const code = Math.floor(10000 + Math.random() * 90000).toString();
+console.log("Código generado:", code); // Verifica que se genera correctamente
 
-    // Guardar todo en un token
-    const token = jsonwebtoken.sign(
-      //1-¿que voy a guardar?
-      { email, code, userType, verified: false },
-      //2- secret key
-      config.JWT.secret,
-      //3-¿Cuando expira?
-      { expiresIn: "20m" }
-    );
+const token = jsonwebtoken.sign(
+  { email, code, userType, verified: false },
+  config.JWT.secret,
+  { expiresIn: "20m" }
+);
+
+console.log("Token generado:", token); // Verifica si se generó el token correctamente
 
     //Guardamos el token en una cookie
     res.cookie("tokenRecoveryCode", token, { maxAge: 20 * 60 * 1000 });
