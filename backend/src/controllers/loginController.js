@@ -16,7 +16,7 @@ loginController.login = async (req, res) => {
 
     // Admin, Empleados y Clientes
     if (
-      email === config.emailAdmin.email && password === config.emailAdmin.password ) {
+      email === config.admin.email && password === config.admin.password ) {
       (userType = "admin");
       (userFound = { _id: "admin" });
     } else {

@@ -32,13 +32,13 @@ registerclientsController.register = async (req, res) => {
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
-        user: config.email.email_user,
-        pass: config.email.email_pass,
+        user: config.emailUser.user_email,
+        pass: config.emailUser.user_pass,
       },
     });
 
     const mailOptions = {
-        from: config.email.email_user,
+        from: config.emailUser.email_user,
         to: email,
         subject: "Verificación de correo",
         html: `
@@ -67,14 +67,14 @@ registerclientsController.register = async (req, res) => {
 
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
-        return res.json({ message: "Error sending email" + error });
+        return res.json({ message: "Error sending email " + error });
       }
+      res.json({
+      message: "Client registered, Please verify your email with the code sent",
+    });
       console.log("Email sent" + info);
     });
 
-    res.json({
-      message: "Client registered, Please verify your email with the code sent",
-    });
   } catch (error) {
     console.log("error" + error);
   }
